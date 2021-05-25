@@ -1,6 +1,411 @@
-import React from 'react'
-import styles from './styles.module.css'
+import React, { useState, useEffect, useRef } from 'react';
+import { Popover, Button } from '@material-ui/core';
+import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
-export const ExampleComponent = ({ text }) => {
-  return <div className={styles.test}>Example Component: {text}</div>
-}
+import { PrevIcon, NextIcon, DownTriangleIcon, CloseIcon } from './assets/icons';
+
+import css from './styles.module.scss';
+
+const scrollToItem = (itemId) => {
+  var parent = document.getElementById(itemId)?.parentElement;
+  var item = document.getElementById(itemId);
+  parent && parent.scrollTo({
+    top: item.offsetTop - (item.offsetHeight * 2) + 5,
+    behavior: 'auto',
+  });
+};
+
+/**
+ * @param {number} month
+ * @param {boolean} withSmallName
+ * @returns {string} month name
+ */
+const getMonthName = (month, withSmallName = false) => {
+  const monthNames = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+  const smallMonthNames = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ];
+  return withSmallName ? smallMonthNames[month] : monthNames[month];
+};
+
+/**
+ * add zero before the number
+ * @param {number} st
+ * @returns {string} string: 1 => 01
+ */
+const twoZeroPadStart = st => String(st).padStart(2, '0');
+
+const today = new Date();
+const todayDateTime = {
+  year: today.getFullYear(),
+  month: today.getMonth(),
+  day: today.getDate(),
+  hour: 0,
+  minute: 0,
+};
+const createDate = ({ year, month, day, hour, minute }) =>
+  new Date(year, month, day, hour, minute, 0, 0);
+
+export const DateTimePicker = ({
+  className,
+  onChange,
+  initialDateTime = null,
+  min = { ...todayDateTime },
+  max,
+  hideTime = false,
+  removeButton = true,
+  darkMode = false,
+  ...attrs
+}) => {
+  const hasInitialDateTime = useRef(false);
+
+  if (initialDateTime) {
+    hasInitialDateTime.current = true;
+  } else {
+    initialDateTime = { ...todayDateTime };
+  }
+  const [isSelected, setIsSelected] = useState(false);
+
+  const initialMonthLength = hasInitialDateTime ?
+    new Date(
+      initialDateTime.year,
+      initialDateTime.month - 1,
+      0
+    ).getDate()
+    :
+    new Date(
+      today.year,
+      today.month - 1,
+      0
+    ).getDate()
+    ;
+
+  const [anchor, setAnchor] = useState(null);
+  const [dateTime, setDateTime] = useState(initialDateTime);
+  const [prevDateTime, setPrevDateTime] = useState(dateTime);
+  const [monthLength, setMonthLength] = useState(initialMonthLength);
+
+  const onSubmit = () => {
+    setIsSelected(true);
+    setAnchor(null);
+    setPrevDateTime(dateTime);
+    onChange && onChange(dateTime);
+  };
+
+  const onMonthChange = () => {
+    const monthLength = new Date(
+      dateTime.year,
+      dateTime.month + 1,
+      0
+    ).getDate();
+    setMonthLength(monthLength);
+
+    if (dateTime.day > monthLength)
+      setDateTime(dt => ({ ...dt, day: monthLength }));
+
+    if (min && dateTime.month === min.month && dateTime.day < min.day)
+      setDateTime(dt => ({ ...dt, day: min.day }));
+
+    if (max && dateTime.month === max.month && dateTime.day > max.day)
+      setDateTime(dt => ({ ...dt, day: max.day }));
+  };
+
+  const onNavigationClick = isNext => {
+    const timestamp = createDate(dateTime).getTime();
+
+    if (isNext) {
+      if (!max || timestamp < createDate(max).getTime())
+        setDateTime(dt => ({
+          ...dt,
+          year: dt.month === 11 ? dt.year + 1 : dt.year,
+          month: dt.month < 11 ? dt.month + 1 : 0,
+        }));
+    } else if (!min || timestamp > createDate(min).getTime())
+      setDateTime(dt => ({
+        ...dt,
+        year: dt.month === 0 ? dt.year - 1 : dt.year,
+        month: dt.month > 0 ? dt.month - 1 : 11,
+      }));
+  };
+
+  const disableNavigationIcon = isNext => {
+    const mDateTime = isNext ?
+      {
+        ...dateTime,
+        year: dateTime.month === 11 ? dateTime.year + 1 : dateTime.year,
+        month: dateTime.month < 11 ? dateTime.month + 1 : 0,
+        day: max ? max.day : dateTime.day,
+        hour: max ? max.hour : dateTime.hour,
+        minute: max ? max.minute : dateTime.minute,
+      } :
+      {
+        ...dateTime,
+        year: dateTime.month === 0 ? dateTime.year - 1 : dateTime.year,
+        month: dateTime.month > 0 ? dateTime.month - 1 : 11,
+        day: min ? min.day : dateTime.day,
+        hour: min ? min.hour : dateTime.hour,
+        minute: min ? min.minute : dateTime.minute,
+      };
+    const time = createDate(mDateTime).getTime();
+
+    // let result = false;
+    // if (isNext)
+    //   result = max ? time > createDate(max).getTime() : false;
+    // else
+    //   result = min ? time < createDate(min).getTime() : false;
+
+    // return result;
+
+    return isNext
+      ? max && time > createDate(max).getTime()
+      : min && time < createDate(min).getTime();
+  };
+
+  const disableDay = day => {
+    const newDateTime = {
+      ...dateTime,
+      day,
+    };
+    const maxDateTime = {
+      ...newDateTime,
+      hour: max?.hour || newDateTime.hour,
+    };
+    const minDateTime = {
+      ...newDateTime,
+      hour: min?.hour || newDateTime.hour,
+    };
+
+    return (
+      day > monthLength ||
+      (max &&
+        createDate(maxDateTime).getTime() > createDate(max).getTime()) ||
+      (min && createDate(minDateTime).getTime() < createDate(min).getTime())
+    );
+  };
+
+  const onDayClick = index => {
+    if (hideTime) {
+      if (!isSelected) setIsSelected(true);
+      setAnchor(null);
+    }
+
+    setDateTime(dt => ({
+      ...dt,
+      day: index + 1,
+    }));
+  };
+
+  const formatDateTime = () =>
+    `${prevDateTime.year}-${twoZeroPadStart(
+      prevDateTime.month + 1
+    )}-${twoZeroPadStart(prevDateTime.day)}` +
+    (!hideTime
+      ? ` ${twoZeroPadStart(prevDateTime.hour)}:${twoZeroPadStart(
+        prevDateTime.minute
+      )}`
+      : '');
+
+  // const dateTimePlaceHolder = `yyyy-mm-dd ${!hideTime ? '--:--' : ''}`;
+  const dateTimePlaceHolder = 'Select Date';
+
+  useEffect(() => {
+    if (hasInitialDateTime.current) setIsSelected(true);
+  }, []);
+
+  useEffect(onMonthChange, [dateTime.month]);
+
+  useEffect(() => {
+    if (anchor)
+      setTimeout(() => {
+        scrollToItem('selected-hour');
+        scrollToItem('selected-minute');
+      }, 0);
+  }, [anchor]);
+
+  return (
+    <div className={css.dateTimePicker} {...attrs}>
+      <div
+        className={classNames(css.buttonContainer, {
+          [css.Dark]: darkMode
+        })}
+      >
+        <Button
+          className={classNames(css.pickerButton, className)}
+          onClick={e => setAnchor(e.target)}
+        >
+          {isSelected ? formatDateTime() : dateTimePlaceHolder}
+          <DownTriangleIcon />
+        </Button>
+
+        {removeButton && isSelected && (
+          <div className={css.CloseCircle} onClick={() => setIsSelected(false)}>
+            <CloseIcon />
+          </div>
+        )}
+      </div>
+
+      <Popover
+        className={css.popover}
+        PaperProps={{
+          className: darkMode ? css.popoverPaperDark : css.popoverPaper
+        }}
+        open={Boolean(anchor)}
+        anchorEl={anchor}
+        onClose={() => setAnchor(null)}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
+      >
+        <div
+          className={classNames(css.container, {
+            [css.hideTime]: hideTime,
+            [css.Dark]: darkMode
+          })}
+        >
+          <div className={css.dateContainer}>
+            <header className={css.header}>
+              <span className={css.year}>
+                {`${getMonthName(dateTime.month, true)} ${dateTime.year
+                  }`}
+              </span>
+
+              <div className={css.navigation}>
+                <button
+                  className={classNames(css.navIcon, {
+                    [css.disable]: disableNavigationIcon(false),
+                  })}
+                  disabled={disableNavigationIcon(false)}
+                  onClick={() => onNavigationClick(false)}
+                >
+                  <PrevIcon />
+                </button>{' '}
+                <button
+                  className={classNames(css.navIcon, {
+                    [css.disable]: disableNavigationIcon(true),
+                  })}
+                  disabled={disableNavigationIcon(true)}
+                  onClick={() => onNavigationClick(true)}
+                >
+                  <NextIcon />
+                </button>
+              </div>
+            </header>
+
+            <div className={css.days}>
+              {new Array(31).fill(null).map((_, index) => (
+                <div
+                  key={index}
+                  className={classNames(css.day, {
+                    [css.selected]: dateTime.day === index + 1,
+                    [css.disable]: disableDay(index + 1),
+                  })}
+                  onClick={() => onDayClick(index)}
+                >
+                  <span>{twoZeroPadStart(index + 1)}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className={classNames(css.timeContainer, {
+            [css.hide]: hideTime,
+          })}
+          >
+            <div className={css.hours}>
+              <div className={css.hourTitle} >
+                Hour
+              </div>
+              {new Array(24).fill(null).map((_, index) => (
+                <div
+                  key={index}
+                  className={classNames(css.hour, {
+                    [css.selected]: dateTime.hour === index,
+                  })}
+                  onClick={() =>
+                    setDateTime(dt => ({ ...dt, hour: index }))
+                  }
+                  id={dateTime.hour === index ? 'selected-hour' : 'hour'}
+                >
+                  {twoZeroPadStart(index)}
+                </div>
+              ))}
+            </div>
+
+            <div className={css.minutes}>
+              <div className={css.minuteTitle} >
+                Min
+              </div>
+              {new Array(60).fill(null).map((_, index) => (
+                <div
+                  key={index}
+                  className={classNames(css.minute, {
+                    [css.selected]: dateTime.minute === index,
+                  })}
+                  onClick={() =>
+                    setDateTime(dt => ({ ...dt, minute: index }))
+                  }
+                  id={dateTime.minute === index ? 'selected-minute' : 'minute'}
+                >
+                  {twoZeroPadStart(index)}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        {!hideTime && (
+          <div className={classNames(css.submitContainer, {
+            [css.Dark]: darkMode
+          })}>
+            <button
+              className={css.SubmitButton}
+              onClick={onSubmit}
+            >
+              Submit
+            </button>
+          </div>
+        )}
+      </Popover>
+    </div>
+  );
+};
+
+DateTimePicker.propTypes = {
+  className: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  initialDateTime: PropTypes.object,
+  min: PropTypes.object,
+  max: PropTypes.object,
+  hideTime: PropTypes.bool,
+  removeButton: PropTypes.bool,
+  darkMode: PropTypes.bool,
+};

@@ -1,0 +1,407 @@
+$font-family-medium: Helvetica-Neue-Medium;
+$font-family-bold: Helvetica-Neue-Bold;
+$bg-box-light: #ffffff;
+$bg-box-dark: #242526;
+$bg-box-2-light: #e6e7eb;
+$bg-box-2-dark: #3a3b3c;
+$font-active: #1977f2;
+$shadow-light: #c3c2c1;
+$shadow-dark: #161819;
+$border-light: #d5d5d3;
+$border-dark: #4d535b;
+$font-normal-light: #2a2a2a;
+$font-normal-dark: #e5e6ec;
+$selected-color: #1a76f2;
+$bg-header-light: #5d6670;
+$bg-header-dark: #a7abaf;
+$bg-header-disable-light: #5d667040;
+$bg-header-disable-dark: #a7abaf40;
+$bg-hover-light: #d8dade;
+$bg-hover-dark: #4e4f50;
+
+.dateTimePicker {
+  .buttonContainer {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    .pickerButton {
+      font-family: $font-family-medium !important;
+      font-size: var(--font-size-medium) !important;
+      color: $font-active !important;
+      white-space: nowrap !important;
+      text-transform: none !important;
+      position: relative !important;
+      justify-content: flex-start !important;
+      padding-right: 20px !important;
+
+      svg {
+        width: 10px;
+        height: 10px;
+        position: absolute !important;
+        right: 5px !important;
+        bottom: calc(50% - 7.5px) !important;
+        fill: $font-active;
+      }
+    }
+    .CloseCircle {
+      position: absolute;
+      right: 0;
+      top: calc(50% + 2px) !important;
+      padding: 2px !important;
+      cursor: pointer;
+      background-color: $bg-box-2-light;
+      border-radius: 50%;
+      width: 12px !important;
+      height: 12px !important;
+      > svg {
+        width: 10px !important;
+        height: 10px !important;
+        fill: $font-normal-light;
+        position: absolute;
+        top: calc(50% - 5px);
+        left: calc(50% - 5px);
+      }
+    }
+
+    &.Dark {
+      .CloseCircle {
+        background-color: $bg-box-2-dark;
+        > svg {
+          fill: $font-normal-dark;
+        }
+      }
+    }
+  }
+}
+
+.popover {
+  background-color: transparent !important;
+}
+
+.popoverPaper {
+  background-color: $bg-box-light !important;
+  box-shadow: 0 0 8px $shadow-light;
+}
+.popoverPaperDark {
+  background-color: $bg-box-dark !important;
+  box-shadow: 0 0 8px $shadow-dark;
+}
+
+.container {
+  width: 290px;
+  height: 240px;
+  display: flex;
+  flex-direction: row;
+  background-color: transparent;
+  padding: 20px 15px 10px;
+  transition: 0.2s;
+  border-radius: 5px 5px 0 0;
+  z-index: 10;
+
+  &.hideTime {
+    width: 200px;
+  }
+
+  > .dateContainer {
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+    > .header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      padding-left: 10px;
+      padding-left: 10px;
+
+      > .year {
+        font-weight: bold;
+        font-size: var(--font-size-xxx-large);
+        cursor: default;
+        transition: 0.2s;
+        font-family: $font-family-bold;
+        color: $font-normal-light;
+      }
+
+      > .navigation {
+        padding: 2px;
+      }
+
+      .navIcon {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        outline: none;
+
+        svg {
+          vertical-align: middle;
+          fill: $bg-header-light;
+        }
+
+        &.disable {
+          cursor: not-allowed;
+
+          svg {
+            fill: $bg-header-disable-light;
+          }
+        }
+      }
+    }
+    > .days {
+      display: flex;
+      flex-wrap: wrap;
+      flex-grow: 1;
+
+      > .day {
+        width: 20%;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        color: #888;
+        cursor: pointer;
+        transition: 0.2s;
+        font-family: $font-family-medium;
+        font-size: var(--font-size-small) !important;
+        border-radius: 5px;
+
+        &.selected {
+          background-color: $selected-color;
+          color: #fff;
+        }
+
+        &.disable {
+          color: $bg-header-disable-light;
+          pointer-events: none;
+        }
+
+        &:not(.selected):not(.disable):hover {
+          background-color: #d8dade;
+        }
+      }
+    }
+  }
+
+  > .timeContainer {
+    border-left: 1px solid $border-light;
+    height: inherit;
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+
+    &.hide {
+      display: none;
+    }
+
+    > .hours {
+      height: inherit;
+      display: block;
+      overflow-y: auto;
+      flex: 1;
+      align-items: center;
+      justify-content: center;
+      padding: 0 5px 5px 5px;
+
+      > .hourTitle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #888;
+        font-family: $font-family-bold;
+        font-size: var(--font-size-large) !important;
+        padding: 5px;
+        margin: auto;
+        position: sticky;
+        top: 0;
+        background-color: $bg-box-light;
+      }
+
+      > .hour {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #888;
+        cursor: pointer;
+        transition: 0.2s;
+        font-family: $font-family-medium;
+        font-size: var(--font-size-large) !important;
+        padding: 5px;
+        border-radius: 5px;
+        margin: auto;
+
+        &.selected {
+          background-color: $selected-color;
+          color: #fff;
+        }
+
+        &:not(.selected):hover {
+          background-color: #d8dade;
+        }
+      }
+    }
+
+    > .minutes {
+      height: inherit;
+      display: block;
+      overflow-y: auto;
+      flex: 1;
+      align-items: center;
+      justify-content: center;
+      padding: 0 5px 5px 5px;
+
+      > .minuteTitle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #888;
+        font-family: $font-family-bold;
+        font-size: var(--font-size-large) !important;
+        padding: 5px;
+        margin: auto;
+        position: sticky;
+        top: 0;
+        background-color: $bg-box-light;
+      }
+
+      > .minute {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #888;
+        cursor: pointer;
+        transition: 0.2s;
+        font-family: $font-family-medium;
+        font-size: var(--font-size-large) !important;
+        padding: 5px;
+        border-radius: 5px;
+        margin: auto;
+
+        &.selected {
+          background-color: $selected-color;
+          color: #fff;
+        }
+
+        &:not(.selected):hover {
+          background-color: #d8dade;
+        }
+      }
+    }
+  }
+  &.Dark {
+    > .dateContainer {
+      > .header {
+        > .year {
+          color: $font-normal-dark;
+        }
+
+        .navIcon {
+          svg {
+            fill: $bg-header-dark;
+          }
+
+          &.disable {
+            svg {
+              fill: $bg-header-disable-dark;
+            }
+          }
+        }
+      }
+
+      > .days {
+        > .day {
+          color: #aaa;
+
+          &.selected {
+            color: #fff;
+          }
+
+          &.disable {
+            color: $bg-header-disable-dark;
+            pointer-events: none;
+          }
+
+          &:not(.selected):not(.disable):hover {
+            background-color: #d8dade;
+          }
+        }
+      }
+    }
+
+    > .timeContainer {
+      border-left: 1px solid $border-dark;
+
+      > .hours {
+        > .hourTitle {
+          color: #aaa;
+          background-color: $bg-box-dark;
+        }
+
+        > .hour {
+          color: #aaa;
+
+          &.selected {
+            color: #fff;
+          }
+
+          &:not(.selected):hover {
+            background-color: #d8dade;
+          }
+        }
+      }
+
+      > .minutes {
+        > .minuteTitle {
+          color: #aaa;
+          background-color: $bg-box-dark;
+        }
+        > .minute {
+          color: #aaa;
+
+          &.selected {
+            color: #fff;
+          }
+
+          &:not(.selected):hover {
+            background-color: #d8dade;
+          }
+        }
+      }
+    }
+  }
+}
+
+.submitContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  > .SubmitButton {
+    width: 100%;
+    background-color: $bg-box-light;
+    color: $font-normal-light;
+    font-family: $font-family-medium;
+    font-size: var(--font-size-small);
+    outline: none;
+    margin: 0;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    box-shadow: 0 2px 3px $shadow-light;
+    border-radius: 0px;
+    &:hover {
+      background-color: $bg-hover-light;
+    }
+  }
+
+  &.Dark {
+    > .SubmitButton {
+      background-color: $bg-box-dark;
+      color: $font-normal-dark;
+      box-shadow: 0 2px 3px $shadow-dark;
+      &:hover {
+        background-color: $bg-hover-dark;
+      }
+    }
+  }
+}
