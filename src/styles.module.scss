@@ -21,11 +21,13 @@ $bg-hover-dark: #4e4f50;
 
 .dateTimePicker_DateTimePickerTis {
   .buttonContainer_DateTimePickerTis {
-    display: flex;
-    flex-flow: row;
-    align-items: center;
-    justify-content: flex-start;
-    position: relative;
+    display: flex !important;
+    flex-flow: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    position: relative !important;
+    width: fit-content !important;
+    height: fit-content !important;
     .pickerButton_DateTimePickerTis {
       font-family: $font-family-medium !important;
       font-size: var(--font-size-medium) !important;
@@ -35,33 +37,36 @@ $bg-hover-dark: #4e4f50;
       position: relative !important;
       justify-content: flex-start !important;
       padding-right: 20px !important;
+      position: relative !important;
+      z-index: 1 !important;
 
       svg {
         width: 10px;
         height: 10px;
         position: absolute !important;
-        right: 5px !important;
-        bottom: calc(50% - 7.5px) !important;
+        right: 10px !important;
+        bottom: calc(50% - 5px) !important;
         fill: $font-active;
       }
     }
     .CloseCircle_DateTimePickerTis {
-      position: absolute;
-      right: 0;
-      top: calc(50% + 2px) !important;
+      position: absolute !important;
+      right: 10px;
+      top: calc(50% - 7.5px) !important;
       padding: 2px !important;
       cursor: pointer;
       background-color: $bg-box-2-light;
       border-radius: 50%;
-      width: 12px !important;
-      height: 12px !important;
+      width: 15px !important;
+      height: 15px !important;
+      z-index: 10 !important;
       > svg {
         width: 10px !important;
         height: 10px !important;
         fill: $font-normal-light;
-        position: absolute;
-        top: calc(50% - 5px);
-        left: calc(50% - 5px);
+        position: absolute !important;
+        top: calc(50% - 5.5px) !important;
+        left: calc(50% - 5.5px) !important;
       }
     }
 

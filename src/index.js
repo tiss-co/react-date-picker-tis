@@ -259,7 +259,7 @@ export const DateTimePicker = ({
           onClick={e => setAnchor(e.target)}
         >
           {isSelected ? formatDateTime() : dateTimePlaceHolder}
-          <DownTriangleIcon />
+          {(!removeButton || !isSelected) && <DownTriangleIcon />}
         </Button>
 
         {removeButton && isSelected && (

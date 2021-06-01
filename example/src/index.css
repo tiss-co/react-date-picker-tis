@@ -14,4 +14,10 @@
 
 .DateTimePicker {
   margin-top: 20px !important;
+
+  min-width: 75px !important;
+  width: 325px !important;
+  border: 1px solid #ccc !important;
+  border-radius: 25px !important;
+  margin-top: 1vh !important;
 }
