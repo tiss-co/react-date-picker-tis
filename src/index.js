@@ -248,14 +248,14 @@ export const DateTimePicker = ({
   }, [anchor]);
 
   return (
-    <div className={css.dateTimePicker} {...attrs}>
+    <div className={css.dateTimePicker_DateTimePickerTis} {...attrs}>
       <div
-        className={classNames(css.buttonContainer, {
-          [css.Dark]: darkMode
+        className={classNames(css.buttonContainer_DateTimePickerTis, {
+          [css.Dark_DateTimePickerTis]: darkMode
         })}
       >
         <Button
-          className={classNames(css.pickerButton, className)}
+          className={classNames(css.pickerButton_DateTimePickerTis, className)}
           onClick={e => setAnchor(e.target)}
         >
           {isSelected ? formatDateTime() : dateTimePlaceHolder}
@@ -263,16 +263,16 @@ export const DateTimePicker = ({
         </Button>
 
         {removeButton && isSelected && (
-          <div className={css.CloseCircle} onClick={() => setIsSelected(false)}>
+          <div className={css.CloseCircle_DateTimePickerTis} onClick={() => setIsSelected(false)}>
             <CloseIcon />
           </div>
         )}
       </div>
 
       <Popover
-        className={css.popover}
+        className={css.popover_DateTimePickerTis}
         PaperProps={{
-          className: darkMode ? css.popoverPaperDark : css.popoverPaper
+          className: darkMode ? css.popoverPaperDark_DateTimePickerTis : css.popoverPaper_DateTimePickerTis
         }}
         open={Boolean(anchor)}
         anchorEl={anchor}
@@ -287,22 +287,22 @@ export const DateTimePicker = ({
         }}
       >
         <div
-          className={classNames(css.container, {
-            [css.hideTime]: hideTime,
-            [css.Dark]: darkMode
+          className={classNames(css.container_DateTimePickerTis, {
+            [css.hideTime_DateTimePickerTis]: hideTime,
+            [css.Dark_DateTimePickerTis]: darkMode
           })}
         >
-          <div className={css.dateContainer}>
-            <header className={css.header}>
-              <span className={css.year}>
+          <div className={css.dateContainer_DateTimePickerTis}>
+            <header className={css.header_DateTimePickerTis}>
+              <span className={css.year_DateTimePickerTis}>
                 {`${getMonthName(dateTime.month, true)} ${dateTime.year
                   }`}
               </span>
 
-              <div className={css.navigation}>
+              <div className={css.navigation_DateTimePickerTis}>
                 <button
-                  className={classNames(css.navIcon, {
-                    [css.disable]: disableNavigationIcon(false),
+                  className={classNames(css.navIcon_DateTimePickerTis, {
+                    [css.disable_DateTimePickerTis]: disableNavigationIcon(false),
                   })}
                   disabled={disableNavigationIcon(false)}
                   onClick={() => onNavigationClick(false)}
@@ -310,8 +310,8 @@ export const DateTimePicker = ({
                   <PrevIcon />
                 </button>{' '}
                 <button
-                  className={classNames(css.navIcon, {
-                    [css.disable]: disableNavigationIcon(true),
+                  className={classNames(css.navIcon_DateTimePickerTis, {
+                    [css.disable_DateTimePickerTis]: disableNavigationIcon(true),
                   })}
                   disabled={disableNavigationIcon(true)}
                   onClick={() => onNavigationClick(true)}
@@ -321,13 +321,13 @@ export const DateTimePicker = ({
               </div>
             </header>
 
-            <div className={css.days}>
+            <div className={css.days_DateTimePickerTis}>
               {new Array(31).fill(null).map((_, index) => (
                 <div
                   key={index}
-                  className={classNames(css.day, {
-                    [css.selected]: dateTime.day === index + 1,
-                    [css.disable]: disableDay(index + 1),
+                  className={classNames(css.day_DateTimePickerTis, {
+                    [css.selected_DateTimePickerTis]: dateTime.day === index + 1,
+                    [css.disable_DateTimePickerTis]: disableDay(index + 1),
                   })}
                   onClick={() => onDayClick(index)}
                 >
@@ -337,19 +337,19 @@ export const DateTimePicker = ({
             </div>
           </div>
 
-          <div className={classNames(css.timeContainer, {
-            [css.hide]: hideTime,
+          <div className={classNames(css.timeContainer_DateTimePickerTis, {
+            [css.hide_DateTimePickerTis]: hideTime,
           })}
           >
-            <div className={css.hours}>
-              <div className={css.hourTitle} >
+            <div className={css.hours_DateTimePickerTis}>
+              <div className={css.hourTitle_DateTimePickerTis} >
                 Hour
               </div>
               {new Array(24).fill(null).map((_, index) => (
                 <div
                   key={index}
-                  className={classNames(css.hour, {
-                    [css.selected]: dateTime.hour === index,
+                  className={classNames(css.hour_DateTimePickerTis, {
+                    [css.selected_DateTimePickerTis]: dateTime.hour === index,
                   })}
                   onClick={() =>
                     setDateTime(dt => ({ ...dt, hour: index }))
@@ -361,15 +361,15 @@ export const DateTimePicker = ({
               ))}
             </div>
 
-            <div className={css.minutes}>
-              <div className={css.minuteTitle} >
+            <div className={css.minutes_DateTimePickerTis}>
+              <div className={css.minuteTitle_DateTimePickerTis} >
                 Min
               </div>
               {new Array(60).fill(null).map((_, index) => (
                 <div
                   key={index}
-                  className={classNames(css.minute, {
-                    [css.selected]: dateTime.minute === index,
+                  className={classNames(css.minute_DateTimePickerTis, {
+                    [css.selected_DateTimePickerTis]: dateTime.minute === index,
                   })}
                   onClick={() =>
                     setDateTime(dt => ({ ...dt, minute: index }))
@@ -383,11 +383,11 @@ export const DateTimePicker = ({
           </div>
         </div>
         {!hideTime && (
-          <div className={classNames(css.submitContainer, {
-            [css.Dark]: darkMode
+          <div className={classNames(css.submitContainer_DateTimePickerTis, {
+            [css.Dark_DateTimePickerTis]: darkMode
           })}>
             <button
-              className={css.SubmitButton}
+              className={css.SubmitButton_DateTimePickerTis}
               onClick={onSubmit}
             >
               Submit
