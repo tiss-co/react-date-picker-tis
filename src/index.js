@@ -80,6 +80,8 @@ export const DateTimePicker = ({
   hideTime = false,
   removeButton = true,
   darkMode = false,
+  startIcon,
+  downIcon,
   ...attrs
 }) => {
   const hasInitialDateTime = useRef(false);
@@ -258,8 +260,9 @@ export const DateTimePicker = ({
           className={classNames(css.pickerButton_DateTimePickerTis, className)}
           onClick={e => setAnchor(e.target)}
         >
+          {startIcon && startIcon}
           {isSelected ? formatDateTime() : dateTimePlaceHolder}
-          {(!removeButton || !isSelected) && <DownTriangleIcon />}
+          {(!removeButton || !isSelected) && (downIcon ? downIcon : <DownTriangleIcon />)}
         </Button>
 
         {removeButton && isSelected && (
@@ -408,4 +411,6 @@ DateTimePicker.propTypes = {
   hideTime: PropTypes.bool,
   removeButton: PropTypes.bool,
   darkMode: PropTypes.bool,
+  startIcon: PropTypes.any,
+  downIcon: PropTypes.any,
 };
