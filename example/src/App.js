@@ -15,7 +15,7 @@ const App = () => {
         // initialDateTime={today} // dateTime object
         // min={today} // dateTime object
         // max={nexMonth} // dateTime object
-        hideTime={true}
+        hideTime={false}
         removeButton={true}
         darkMode={false}
       />

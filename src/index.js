@@ -257,12 +257,16 @@ export const DateTimePicker = ({
         })}
       >
         <Button
-          className={classNames(css.pickerButton_DateTimePickerTis, className)}
+          className={classNames(css.pickerButton_DateTimePickerTis, {
+            [css.buttonPaddingRight_DateTimePickerTis]: removeButton && isSelected
+          }, className)}
           onClick={e => setAnchor(e.target)}
         >
-          {startIcon && startIcon}
-          {isSelected ? formatDateTime() : dateTimePlaceHolder}
-          {(!removeButton || !isSelected) && (downIcon ? downIcon : <DownTriangleIcon />)}
+          <div className={css.pickerButtonInsideContainer_DateTimePickerTis}>
+            {startIcon && startIcon}
+            {isSelected ? formatDateTime() : dateTimePlaceHolder}
+            {(!removeButton || !isSelected) && (downIcon ? downIcon : <DownTriangleIcon />)}
+          </div>
         </Button>
 
         {removeButton && isSelected && (

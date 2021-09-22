@@ -36,23 +36,34 @@ $bg-hover-dark: #4e4f50;
       text-transform: none !important;
       position: relative !important;
       justify-content: flex-start !important;
-      padding-right: 20px !important;
       position: relative !important;
       z-index: 1 !important;
+      width: fit-content;
+      padding: 4px 15px !important;
 
-      svg {
-        width: 10px;
-        height: 10px;
-        position: absolute !important;
-        right: 10px !important;
-        bottom: calc(50% - 5px) !important;
-        fill: $font-active;
+      &.buttonPaddingRight_DateTimePickerTis {
+        padding-right: 35px !important;
+      }
+
+      .pickerButtonInsideContainer_DateTimePickerTis {
+        width: inherit;
+        height: inherit;
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        justify-content: center;
+        svg {
+          width: 10px;
+          height: 10px;
+          margin: 3px 5px 0 5px;
+          fill: $font-active;
+        }
       }
     }
     .CloseCircle_DateTimePickerTis {
       position: absolute !important;
       right: 10px;
-      top: calc(50% - 7.5px) !important;
+      top: calc(50% - 5px) !important;
       padding: 2px !important;
       cursor: pointer;
       background-color: $bg-box-2-light;
