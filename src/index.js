@@ -214,6 +214,7 @@ export const DateTimePicker = ({
     if (hideTime) {
       if (!isSelected) setIsSelected(true);
       setAnchor(null);
+      onChange && onChange(dateTime);
     }
 
     setDateTime(dt => ({
