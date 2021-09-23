@@ -211,16 +211,19 @@ export const DateTimePicker = ({
   };
 
   const onDayClick = index => {
+    const mDateTime = {
+      ...dateTime,
+      day: index + 1,
+    };
     if (hideTime) {
       if (!isSelected) setIsSelected(true);
+
+      setPrevDateTime(mDateTime);
       setAnchor(null);
-      onChange && onChange(dateTime);
+      onChange && onChange(mDateTime);
     }
 
-    setDateTime(dt => ({
-      ...dt,
-      day: index + 1,
-    }));
+    setDateTime(mDateTime);
   };
 
   const formatDateTime = () =>
