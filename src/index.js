@@ -82,6 +82,7 @@ export const DateTimePicker = ({
   darkMode = false,
   startIcon,
   downIcon,
+  updateDatePicker,
   ...attrs
 }) => {
   const hasInitialDateTime = useRef(false);
@@ -111,6 +112,8 @@ export const DateTimePicker = ({
   const [dateTime, setDateTime] = useState(initialDateTime);
   const [prevDateTime, setPrevDateTime] = useState(dateTime);
   const [monthLength, setMonthLength] = useState(initialMonthLength);
+
+  updateDatePicker?.current = (date) => setDateTime(date);
 
   const onSubmit = () => {
     setIsSelected(true);
@@ -174,14 +177,6 @@ export const DateTimePicker = ({
         minute: min ? min.minute : dateTime.minute,
       };
     const time = createDate(mDateTime).getTime();
-
-    // let result = false;
-    // if (isNext)
-    //   result = max ? time > createDate(max).getTime() : false;
-    // else
-    //   result = min ? time < createDate(min).getTime() : false;
-
-    // return result;
 
     return isNext
       ? max && time > createDate(max).getTime()
