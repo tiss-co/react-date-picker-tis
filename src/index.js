@@ -82,7 +82,7 @@ export const DateTimePicker = ({
   darkMode = false,
   startIcon,
   downIcon,
-  updateDatePicker,
+  updateDatePicker = { current: () => { } },
   ...attrs
 }) => {
   const hasInitialDateTime = useRef(false);
@@ -416,9 +416,5 @@ DateTimePicker.propTypes = {
   darkMode: PropTypes.bool,
   startIcon: PropTypes.any,
   downIcon: PropTypes.any,
-  updateDatePicker: PropTypes.objectOf({
-    year: PropTypes.number,
-    month: PropTypes.number,
-    day: PropTypes.number,
-  }),
+  updateDatePicker: PropTypes.func,
 };
