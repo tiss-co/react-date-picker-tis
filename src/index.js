@@ -416,4 +416,9 @@ DateTimePicker.propTypes = {
   darkMode: PropTypes.bool,
   startIcon: PropTypes.any,
   downIcon: PropTypes.any,
+  updateDatePicker: PropTypes.objectOf({
+    year: PropTypes.number,
+    month: PropTypes.number,
+    day: PropTypes.number,
+  }),
 };
