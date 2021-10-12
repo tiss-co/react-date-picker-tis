@@ -113,7 +113,7 @@ export const DateTimePicker = ({
   const [prevDateTime, setPrevDateTime] = useState(dateTime);
   const [monthLength, setMonthLength] = useState(initialMonthLength);
 
-  updateDatePicker?.current = (date) => setDateTime(date);
+  updateDatePicker.current = (date) => setDateTime(date);
 
   const onSubmit = () => {
     setIsSelected(true);
