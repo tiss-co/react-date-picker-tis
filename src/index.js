@@ -83,6 +83,9 @@ export const DateTimePicker = ({
   startIcon,
   downIcon,
   updateDatePicker = { current: () => { } },
+  containerId,
+  buttonId,
+  popoverId,
   ...attrs
 }) => {
   const hasInitialDateTime = useRef(false);
@@ -259,7 +262,7 @@ export const DateTimePicker = ({
   }, [anchor]);
 
   return (
-    <div className={css.dateTimePicker_DateTimePickerTis} {...attrs}>
+    <div id={containerId} className={css.dateTimePicker_DateTimePickerTis} {...attrs}>
       <div
         className={classNames(css.buttonContainer_DateTimePickerTis, {
           [css.Dark_DateTimePickerTis]: darkMode
@@ -270,6 +273,7 @@ export const DateTimePicker = ({
             [css.buttonPaddingRight_DateTimePickerTis]: removeButton && isSelected
           }, className)}
           onClick={e => setAnchor(e.target)}
+          id={buttonId}
         >
           <div className={css.pickerButtonInsideContainer_DateTimePickerTis}>
             {startIcon && startIcon}
@@ -301,6 +305,7 @@ export const DateTimePicker = ({
           vertical: 'top',
           horizontal: 'center',
         }}
+        id={popoverId}
       >
         <div
           className={classNames(css.container_DateTimePickerTis, {
@@ -427,4 +432,7 @@ DateTimePicker.propTypes = {
   startIcon: PropTypes.any,
   downIcon: PropTypes.any,
   updateDatePicker: PropTypes.object,
+  containerId: PropTypes.string,
+  buttonId: PropTypes.string,
+  popoverId: PropTypes.string,
 };
