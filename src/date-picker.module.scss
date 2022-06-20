@@ -1,0 +1,520 @@
+$font-family-regular: Helvetica-Neue-Regular;
+$font-family-medium: Helvetica-Neue-Medium;
+$font-family-bold: Helvetica-Neue-Bold;
+$bg-box-light: #ffffff;
+$bg-box-dark: #242526;
+$bg-box-2-light: #e6e7eb;
+$bg-box-2-dark: #3a3b3c;
+$font-active: #1977f2;
+$shadow-light: #c3c2c1;
+$shadow-dark: #161819;
+$border-light: #d5d5d3;
+$border-dark: #4d535b;
+$font-normal-light: #2a2a2a;
+$font-normal-dark: #e5e6ec;
+$selected-color: #1a76f2;
+$bg-header-light: #5d6670;
+$bg-header-dark: #a7abaf;
+$bg-header-disable-light: #5d667040;
+$bg-header-disable-dark: #a7abaf40;
+$bg-hover-light: #d8dade;
+$bg-hover-light-alpha: #d8dade69;
+$bg-hover-dark: #4e4f50;
+
+.DatePicker_SimpleDatePickerTis {
+  .buttonContainer_SimpleDatePickerTis {
+    display: flex !important;
+    flex-flow: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+    width: fit-content !important;
+    height: fit-content !important;
+    min-width: 50px;
+    min-height: 25px;
+    border: 1px solid $border-light;
+    border-radius: 4.5px !important;
+    padding: 5px 15px;
+    color: &font-normal-light;
+    svg {
+      width: 18px;
+      height: 17px;
+      margin-left: 5px;
+      fill: $font-active;
+      cursor: pointer;
+      padding: 5px;
+    }
+    .input_SimpleDatePickerTis {
+      width: 50px;
+      border: none;
+      outline: none;
+      font-family: $font-family-regular;
+      font-size: var(--font-size-medium);
+      color: $font-normal-light;
+      text-align: center;
+      &.input_small_SimpleDatePickerTis {
+        width: 30px;
+      }
+    }
+
+    .CloseCircle_SimpleDatePickerTis {
+      position: absolute !important;
+      right: 10px;
+      top: calc(50% - 5px) !important;
+      padding: 2px !important;
+      cursor: pointer;
+      background-color: $bg-box-2-light;
+      border-radius: 50%;
+      width: 15px !important;
+      height: 15px !important;
+      z-index: 10 !important;
+      > svg {
+        width: 10px !important;
+        height: 10px !important;
+        fill: $font-normal-light;
+        position: absolute !important;
+        top: calc(50% - 5.5px) !important;
+        left: calc(50% - 5.5px) !important;
+      }
+    }
+
+    &.Dark_SimpleDatePickerTis {
+      border-color: $border-dark;
+      color: &font-normal-dark;
+      .CloseCircle_SimpleDatePickerTis {
+        background-color: $bg-box-2-dark;
+        > svg {
+          fill: $font-normal-dark;
+        }
+      }
+      .input_SimpleDatePickerTis {
+        color: $font-normal-dark;
+      }
+    }
+  }
+}
+
+.popover_SimpleDatePickerTis {
+  background-color: transparent !important;
+}
+
+.popoverPaper_SimpleDatePickerTis {
+  background-color: $bg-box-light !important;
+  box-shadow: 0 0 8px $shadow-light;
+}
+
+.popoverPaperDark_SimpleDatePickerTis {
+  background-color: $bg-box-dark !important;
+  box-shadow: 0 0 8px $shadow-dark;
+}
+
+.container_SimpleDatePickerTis {
+  width: fit-content;
+  height: 240px;
+  display: flex;
+  flex-direction: row;
+  background-color: transparent;
+  padding: 0 15px 10px;
+  transition: 0.2s;
+  border-radius: 5px 5px 0 0;
+  z-index: 10;
+
+  &.hideTime_SimpleDatePickerTis {
+    width: fit-content;
+    max-width: 250px;
+  }
+
+  > .dateContainer_SimpleDatePickerTis {
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+    > .header_SimpleDatePickerTis {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      padding-left: 10px;
+      padding-left: 10px;
+
+      > .year_SimpleDatePickerTis {
+        font-weight: bold;
+        font-size: var(--font-size-medium);
+        font-size: 24px;
+        cursor: pointer;
+        transition: 0.2s;
+        font-family: $font-family-bold;
+        color: $font-normal-light;
+        padding: 5px;
+        white-space: nowrap !important;
+        svg {
+          width: 14px;
+          height: 14px;
+          fill: $bg-header-light;
+          // margin-bottom: -5px;
+        }
+        &:hover {
+          background-color: #1977f20c;
+          border-radius: 5px;
+        }
+      }
+
+      > .navigation_SimpleDatePickerTis {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        justify-content: center;
+        padding: 2px;
+      }
+
+      .navIcon_SimpleDatePickerTis {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        outline: none;
+
+        svg {
+          vertical-align: middle;
+          fill: $bg-header-light;
+          width: 15px !important;
+          height: 15px !important;
+        }
+
+        &.disable_SimpleDatePickerTis {
+          cursor: not-allowed;
+
+          svg {
+            fill: $bg-header-disable-light;
+          }
+        }
+      }
+    }
+    > .days_SimpleDatePickerTis {
+      display: flex;
+      flex-wrap: wrap;
+      flex-grow: 1;
+
+      > .day_SimpleDatePickerTis {
+        width: 15%;
+        margin: 0 2.5%;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        color: #888;
+        cursor: pointer;
+        transition: 0.2s;
+        font-family: $font-family-medium;
+        font-size: var(--font-size-small) !important;
+        border-radius: 5px;
+
+        &.selected_SimpleDatePickerTis {
+          background-color: $selected-color;
+          color: #fff;
+          &.disable_SimpleDatePickerTis {
+            color: #fff;
+          }
+        }
+
+        &.disable_SimpleDatePickerTis {
+          color: $bg-header-disable-light;
+          pointer-events: none;
+        }
+
+        &:not(.selected_SimpleDatePickerTis):not(.disable_SimpleDatePickerTis):hover {
+          background-color: #d8dade;
+        }
+      }
+    }
+  }
+
+  > .timeContainer_SimpleDatePickerTis {
+    border-left: 1px solid $border-light;
+    height: inherit;
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+
+    &.hide_SimpleDatePickerTis {
+      display: none;
+    }
+
+    > .hours_SimpleDatePickerTis {
+      height: inherit;
+      display: block;
+      overflow-y: auto;
+      flex: 1;
+      align-items: center;
+      justify-content: center;
+      padding: 0 5px 5px 5px;
+
+      > .hourTitle_SimpleDatePickerTis {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #888;
+        font-family: $font-family-bold;
+        font-size: var(--font-size-large) !important;
+        padding: 5px;
+        margin: auto;
+        position: sticky;
+        top: 0;
+        background-color: $bg-box-light;
+      }
+
+      > .hour_SimpleDatePickerTis {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #888;
+        cursor: pointer;
+        transition: 0.2s;
+        font-family: $font-family-medium;
+        font-size: var(--font-size-large) !important;
+        padding: 5px;
+        border-radius: 5px;
+        margin: auto;
+
+        &.selected_SimpleDatePickerTis {
+          background-color: $selected-color;
+          color: #fff;
+        }
+
+        &:not(.selected_SimpleDatePickerTis):hover {
+          background-color: #d8dade;
+        }
+      }
+    }
+
+    > .minutes_SimpleDatePickerTis {
+      height: inherit;
+      display: block;
+      overflow-y: auto;
+      flex: 1;
+      align-items: center;
+      justify-content: center;
+      padding: 0 5px 5px 5px;
+
+      > .minuteTitle_SimpleDatePickerTis {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #888;
+        font-family: $font-family-bold;
+        font-size: var(--font-size-large) !important;
+        padding: 5px;
+        margin: auto;
+        position: sticky;
+        top: 0;
+        background-color: $bg-box-light;
+      }
+
+      > .minute_SimpleDatePickerTis {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #888;
+        cursor: pointer;
+        transition: 0.2s;
+        font-family: $font-family-medium;
+        font-size: var(--font-size-large) !important;
+        padding: 5px;
+        border-radius: 5px;
+        margin: auto;
+
+        &.selected_SimpleDatePickerTis {
+          background-color: $selected-color;
+          color: #fff;
+        }
+
+        &:not(.selected_SimpleDatePickerTis):hover {
+          background-color: #d8dade;
+        }
+      }
+    }
+  }
+  &.Dark_SimpleDatePickerTis {
+    > .dateContainer_SimpleDatePickerTis {
+      > .header_SimpleDatePickerTis {
+        > .year_SimpleDatePickerTis {
+          color: $font-normal-dark;
+          svg {
+            fill: $bg-header-dark;
+          }
+        }
+
+        .navIcon_SimpleDatePickerTis {
+          svg {
+            fill: $bg-header-dark;
+          }
+
+          &.disable_SimpleDatePickerTis {
+            svg {
+              fill: $bg-header-disable-dark;
+            }
+          }
+        }
+      }
+
+      > .days_SimpleDatePickerTis {
+        > .day_SimpleDatePickerTis {
+          color: #aaa;
+
+          &.selected_SimpleDatePickerTis {
+            color: #fff;
+          }
+
+          &.disable_SimpleDatePickerTis {
+            color: $bg-header-disable-dark;
+            pointer-events: none;
+          }
+
+          &:not(.selected_SimpleDatePickerTis):not(.disable_SimpleDatePickerTis):hover {
+            background-color: #d8dade;
+          }
+        }
+      }
+    }
+
+    > .timeContainer_SimpleDatePickerTis {
+      border-left: 1px solid $border-dark;
+
+      > .hours_SimpleDatePickerTis {
+        > .hourTitle_SimpleDatePickerTis {
+          color: #aaa;
+          background-color: $bg-box-dark;
+        }
+
+        > .hour_SimpleDatePickerTis {
+          color: #aaa;
+
+          &.selected_SimpleDatePickerTis {
+            color: #fff;
+          }
+
+          &:not(.selected_SimpleDatePickerTis):hover {
+            background-color: #d8dade;
+          }
+        }
+      }
+
+      > .minutes_SimpleDatePickerTis {
+        > .minuteTitle_SimpleDatePickerTis {
+          color: #aaa;
+          background-color: $bg-box-dark;
+        }
+        > .minute_SimpleDatePickerTis {
+          color: #aaa;
+
+          &.selected_SimpleDatePickerTis {
+            color: #fff;
+          }
+
+          &:not(.selected_SimpleDatePickerTis):hover {
+            background-color: #d8dade;
+          }
+        }
+      }
+    }
+  }
+}
+
+.submitContainer_SimpleDatePickerTis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  > .SubmitButton_SimpleDatePickerTis {
+    width: 100%;
+    background-color: $bg-box-light;
+    color: $font-normal-light;
+    font-family: $font-family-medium;
+    font-size: var(--font-size-small);
+    outline: none;
+    margin: 0;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    box-shadow: 0 2px 3px $shadow-light;
+    border-radius: 0px;
+    &:hover {
+      background-color: $bg-hover-light;
+    }
+  }
+
+  &.Dark_SimpleDatePickerTis {
+    > .SubmitButton_SimpleDatePickerTis {
+      background-color: $bg-box-dark;
+      color: $font-normal-dark;
+      box-shadow: 0 2px 3px $shadow-dark;
+      &:hover {
+        background-color: $bg-hover-dark;
+      }
+    }
+  }
+}
+
+.container_YearPickerTis {
+  width: fit-content !important;
+  height: 300px !important;
+  border: 1px solid $border-light;
+  border-radius: 4.5px !important;
+  padding: 5px 15px;
+  color: &font-normal-light;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  .yearContainer_YearPickerTis {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    color: #888;
+    cursor: pointer;
+    transition: 0.2s;
+    font-family: $font-family-medium;
+    font-size: var(--font-size-large) !important;
+    border-radius: 0;
+    .year_YearPickerTis {
+      width: 100%;
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid $bg-hover-light;
+      &.selectedYear_YearPickerTis {
+        background-color: $bg-hover-light;
+      }
+      &:not(.selectedYear_YearPickerTis):hover {
+        background-color: $bg-hover-light-alpha;
+      }
+    }
+    .monthsContainer_YearPickerTis {
+      display: grid;
+      grid-template-columns: auto auto auto;
+      margin: 10px 0;
+      .month_YearPickerTis {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        color: #888;
+        cursor: pointer;
+        transition: 0.2s;
+        font-family: $font-family-medium;
+        font-size: var(--font-size-small) !important;
+        border-radius: 5px;
+        margin: 5px;
+        padding: 5px;
+        &.selectedMonth_YearPickerTis {
+          background-color: $selected-color;
+          color: #fff;
+        }
+        &:not(.selectedMonth_YearPickerTis):hover {
+          background-color: $bg-hover-light;
+        }
+      }
+    }
+  }
+
+  &.Dark_YearPickerTis {
+    border-color: $border-dark;
+    color: &$font-normal-dark;
+  }
+}

@@ -1,22 +1,17 @@
 import React from 'react';
 
-import { DateTimePicker } from 'react-date-picker-tis';
+import { DatePicker } from 'react-date-picker-tis';
 import 'react-date-picker-tis/dist/index.css';
 
 const App = () => {
   return (
     <div className='App'>
       <div className='Title'>
-        DateTimePicker Tis
+        DatePicker Tis
       </div>
-      <DateTimePicker
-        className='DateTimePicker'
-        onChange={dateTime => console.log(dateTime)}
-        // initialDateTime={today} // dateTime object
-        // min={today} // dateTime object
-        // max={nexMonth} // dateTime object
-        hideTime={false}
-        removeButton={true}
+      <DatePicker
+        containerClassName='DatePicker'
+        onChange={date => console.log(date)}
         darkMode={false}
       />
     </div>

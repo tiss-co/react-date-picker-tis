@@ -1,3 +1,4 @@
+$font-family-regular: Helvetica-Neue-Regular;
 $font-family-medium: Helvetica-Neue-Medium;
 $font-family-bold: Helvetica-Neue-Bold;
 $bg-box-light: #ffffff;
@@ -17,407 +18,97 @@ $bg-header-dark: #a7abaf;
 $bg-header-disable-light: #5d667040;
 $bg-header-disable-dark: #a7abaf40;
 $bg-hover-light: #d8dade;
+$bg-hover-light-alpha: #d8dade69;
 $bg-hover-dark: #4e4f50;
 
-.dateTimePicker_DateTimePickerTis {
-  .buttonContainer_DateTimePickerTis {
-    display: flex !important;
-    flex-flow: row !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
-    position: relative !important;
-    width: fit-content !important;
-    height: fit-content !important;
-    .pickerButton_DateTimePickerTis {
-      font-family: $font-family-medium !important;
-      font-size: var(--font-size-medium) !important;
-      color: $font-active !important;
-      white-space: nowrap !important;
-      text-transform: none !important;
-      position: relative !important;
-      justify-content: flex-start !important;
-      position: relative !important;
-      z-index: 1 !important;
+.container_DatePickerTis {
+  .buttonContainer_DatePickerTis {
+    > button {
       width: fit-content;
-      padding: 4px 15px !important;
-
-      &.buttonPaddingRight_DateTimePickerTis {
-        padding-right: 35px !important;
-      }
-
-      .pickerButtonInsideContainer_DateTimePickerTis {
-        width: inherit;
-        height: inherit;
-        display: flex;
-        flex-flow: row;
-        align-items: center;
-        justify-content: center;
-        svg {
-          width: 10px;
-          height: 10px;
-          margin: 3px 5px 0 5px;
-          fill: $font-active;
-        }
-      }
-    }
-    .CloseCircle_DateTimePickerTis {
-      position: absolute !important;
-      right: 10px;
-      top: calc(50% - 5px) !important;
-      padding: 2px !important;
+      background-color: $selected-color;
+      color: #f7f7f7;
+      font-family: $font-family-medium;
+      font-size: var(--font-size-small);
+      outline: none;
+      margin: 0;
+      border: none;
+      padding: 4px 10px;
       cursor: pointer;
-      background-color: $bg-box-2-light;
-      border-radius: 50%;
-      width: 15px !important;
-      height: 15px !important;
-      z-index: 10 !important;
-      > svg {
-        width: 10px !important;
-        height: 10px !important;
-        fill: $font-normal-light;
-        position: absolute !important;
-        top: calc(50% - 5.5px) !important;
-        left: calc(50% - 5.5px) !important;
-      }
+      border-radius: 4px;
     }
-
-    &.Dark_DateTimePickerTis {
-      .CloseCircle_DateTimePickerTis {
-        background-color: $bg-box-2-dark;
-        > svg {
-          fill: $font-normal-dark;
-        }
-      }
-    }
+  }
+  .DatePickerContainer_DatePickerTis {
+    width: fit-content;
+    height: 240px;
+    display: flex;
+    flex-direction: row;
+    background-color: transparent;
+    padding: 20px 15px 10px;
+    transition: 0.2s;
+    border-radius: 5px 5px 0 0;
+    z-index: 10;
   }
 }
 
-.popover_DateTimePickerTis {
+.popover_DatePickerTis {
   background-color: transparent !important;
 }
 
-.popoverPaper_DateTimePickerTis {
+.popoverPaper_DatePickerTis {
   background-color: $bg-box-light !important;
   box-shadow: 0 0 8px $shadow-light;
+  padding-top: 10px !important;
 }
-.popoverPaperDark_DateTimePickerTis {
+
+.popoverPaperDark_DatePickerTis {
   background-color: $bg-box-dark !important;
   box-shadow: 0 0 8px $shadow-dark;
-}
-
-.container_DateTimePickerTis {
-  width: 290px;
-  height: 240px;
-  display: flex;
-  flex-direction: row;
-  background-color: transparent;
-  padding: 20px 15px 10px;
-  transition: 0.2s;
-  border-radius: 5px 5px 0 0;
-  z-index: 10;
-
-  &.hideTime_DateTimePickerTis {
-    width: 200px;
-  }
-
-  > .dateContainer_DateTimePickerTis {
-    height: inherit;
-    display: flex;
-    flex-direction: column;
-    flex: 2;
-    > .header_DateTimePickerTis {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-      padding-left: 10px;
-      padding-left: 10px;
-
-      > .year_DateTimePickerTis {
-        font-weight: bold;
-        font-size: var(--font-size-xxx-large);
-        cursor: default;
-        transition: 0.2s;
-        font-family: $font-family-bold;
-        color: $font-normal-light;
-      }
-
-      > .navigation_DateTimePickerTis {
-        padding: 2px;
-      }
-
-      .navIcon_DateTimePickerTis {
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
-        outline: none;
-
-        svg {
-          vertical-align: middle;
-          fill: $bg-header-light;
-        }
-
-        &.disable_DateTimePickerTis {
-          cursor: not-allowed;
-
-          svg {
-            fill: $bg-header-disable-light;
-          }
-        }
-      }
-    }
-    > .days_DateTimePickerTis {
-      display: flex;
-      flex-wrap: wrap;
-      flex-grow: 1;
-
-      > .day_DateTimePickerTis {
-        width: 20%;
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        color: #888;
-        cursor: pointer;
-        transition: 0.2s;
-        font-family: $font-family-medium;
-        font-size: var(--font-size-small) !important;
-        border-radius: 5px;
-
-        &.selected_DateTimePickerTis {
-          background-color: $selected-color;
-          color: #fff;
-        }
-
-        &.disable_DateTimePickerTis {
-          color: $bg-header-disable-light;
-          pointer-events: none;
-        }
-
-        &:not(.selected_DateTimePickerTis):not(.disable_DateTimePickerTis):hover {
-          background-color: #d8dade;
-        }
-      }
-    }
-  }
-
-  > .timeContainer_DateTimePickerTis {
-    border-left: 1px solid $border-light;
-    height: inherit;
-    display: flex;
-    flex-direction: row;
-    flex: 1;
-
-    &.hide_DateTimePickerTis {
-      display: none;
-    }
-
-    > .hours_DateTimePickerTis {
-      height: inherit;
-      display: block;
-      overflow-y: auto;
-      flex: 1;
-      align-items: center;
-      justify-content: center;
-      padding: 0 5px 5px 5px;
-
-      > .hourTitle_DateTimePickerTis {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #888;
-        font-family: $font-family-bold;
-        font-size: var(--font-size-large) !important;
-        padding: 5px;
-        margin: auto;
-        position: sticky;
-        top: 0;
-        background-color: $bg-box-light;
-      }
-
-      > .hour_DateTimePickerTis {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #888;
-        cursor: pointer;
-        transition: 0.2s;
-        font-family: $font-family-medium;
-        font-size: var(--font-size-large) !important;
-        padding: 5px;
-        border-radius: 5px;
-        margin: auto;
-
-        &.selected_DateTimePickerTis {
-          background-color: $selected-color;
-          color: #fff;
-        }
-
-        &:not(.selected_DateTimePickerTis):hover {
-          background-color: #d8dade;
-        }
-      }
-    }
-
-    > .minutes_DateTimePickerTis {
-      height: inherit;
-      display: block;
-      overflow-y: auto;
-      flex: 1;
-      align-items: center;
-      justify-content: center;
-      padding: 0 5px 5px 5px;
-
-      > .minuteTitle_DateTimePickerTis {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #888;
-        font-family: $font-family-bold;
-        font-size: var(--font-size-large) !important;
-        padding: 5px;
-        margin: auto;
-        position: sticky;
-        top: 0;
-        background-color: $bg-box-light;
-      }
-
-      > .minute_DateTimePickerTis {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: #888;
-        cursor: pointer;
-        transition: 0.2s;
-        font-family: $font-family-medium;
-        font-size: var(--font-size-large) !important;
-        padding: 5px;
-        border-radius: 5px;
-        margin: auto;
-
-        &.selected_DateTimePickerTis {
-          background-color: $selected-color;
-          color: #fff;
-        }
-
-        &:not(.selected_DateTimePickerTis):hover {
-          background-color: #d8dade;
-        }
-      }
-    }
-  }
-  &.Dark_DateTimePickerTis {
-    > .dateContainer_DateTimePickerTis {
-      > .header_DateTimePickerTis {
-        > .year_DateTimePickerTis {
-          color: $font-normal-dark;
-        }
-
-        .navIcon_DateTimePickerTis {
-          svg {
-            fill: $bg-header-dark;
-          }
-
-          &.disable_DateTimePickerTis {
-            svg {
-              fill: $bg-header-disable-dark;
-            }
-          }
-        }
-      }
-
-      > .days_DateTimePickerTis {
-        > .day_DateTimePickerTis {
-          color: #aaa;
-
-          &.selected_DateTimePickerTis {
-            color: #fff;
-          }
-
-          &.disable_DateTimePickerTis {
-            color: $bg-header-disable-dark;
-            pointer-events: none;
-          }
-
-          &:not(.selected_DateTimePickerTis):not(.disable_DateTimePickerTis):hover {
-            background-color: #d8dade;
-          }
-        }
-      }
-    }
-
-    > .timeContainer_DateTimePickerTis {
-      border-left: 1px solid $border-dark;
-
-      > .hours_DateTimePickerTis {
-        > .hourTitle_DateTimePickerTis {
-          color: #aaa;
-          background-color: $bg-box-dark;
-        }
-
-        > .hour_DateTimePickerTis {
-          color: #aaa;
-
-          &.selected_DateTimePickerTis {
-            color: #fff;
-          }
-
-          &:not(.selected_DateTimePickerTis):hover {
-            background-color: #d8dade;
-          }
-        }
-      }
-
-      > .minutes_DateTimePickerTis {
-        > .minuteTitle_DateTimePickerTis {
-          color: #aaa;
-          background-color: $bg-box-dark;
-        }
-        > .minute_DateTimePickerTis {
-          color: #aaa;
-
-          &.selected_DateTimePickerTis {
-            color: #fff;
-          }
-
-          &:not(.selected_DateTimePickerTis):hover {
-            background-color: #d8dade;
-          }
-        }
-      }
-    }
-  }
-}
-
-.submitContainer_DateTimePickerTis {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  > .SubmitButton_DateTimePickerTis {
-    width: 100%;
-    background-color: $bg-box-light;
-    color: $font-normal-light;
-    font-family: $font-family-medium;
-    font-size: var(--font-size-small);
-    outline: none;
-    margin: 0;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    box-shadow: 0 2px 3px $shadow-light;
-    border-radius: 0px;
-    &:hover {
-      background-color: $bg-hover-light;
-    }
-  }
-
-  &.Dark_DateTimePickerTis {
-    > .SubmitButton_DateTimePickerTis {
-      background-color: $bg-box-dark;
+  padding-top: 10px !important;
+  .tabs_DatePickerTis {
+    .tab_DatePickerTis {
       color: $font-normal-dark;
-      box-shadow: 0 2px 3px $shadow-dark;
-      &:hover {
-        background-color: $bg-hover-dark;
+    }
+    .rightIcon_DatePickerTis {
+      fill: $font-normal-dark;
+    }
+  }
+}
+
+.tabs_DatePickerTis {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 10px 0;
+  .tab_DatePickerTis {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    transition: 0.5s;
+    font-size: medium;
+    color: $font-normal-light;
+    padding: 5px 10px;
+    position: relative;
+    font-size: var(--font-size-medium);
+    &.activeTab_DatePickerTis {
+      color: $font-active;
+      &::after {
+        content: '';
+        width: 75%;
+        height: 2px;
+        border-radius: 2px;
+        position: absolute;
+        bottom: 0;
+        left: 12.5%;
+        background-color: $font-active;
       }
     }
+  }
+  .rightIcon_DatePickerTis {
+    fill: $font-normal-light;
+    width: 10px;
+    height: 10px;
   }
 }

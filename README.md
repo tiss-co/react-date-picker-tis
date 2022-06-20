@@ -4,8 +4,7 @@
 
 [![NPM](https://img.shields.io/npm/v/react-date-picker-tis.svg)](https://www.npmjs.com/package/react-date-picker-tis) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-![react-date-picker-tis Banner](https://user-images.githubusercontent.com/76048512/119546988-c9575a80-bda9-11eb-99e0-cf797c393ef3.gif)
-
+![react-date-picker-tis Banner](https://user-images.githubusercontent.com/76048512/174603235-a8601d9a-7700-49c6-8bad-a7277ed5cad7.gif)
 
 ## Install
 
@@ -24,19 +23,17 @@ yarn add react-date-picker-tis
 ```jsx
 import React from 'react'
 
-import { DateTimePicker } from 'react-date-picker-tis'
+import { DatePicker } from 'react-date-picker-tis'
 import 'react-date-picker-tis/dist/index.css'
 
 const App = () => {
   return (
-    <DateTimePicker
-      className='DateTimePicker'
-      onChange={(dateTime) => console.log(dateTime)}
-      initialDateTime={today} //dateTime object
-      min={today} //dateTime object
-      max={nexMonth} //dateTime object
-      hideTime={false}
-      removeButton={true}
+    <DatePicker
+      className='DatePicker'
+      onChange={(date) => console.log(date)}
+      initialDate={today} //date object
+      min={today} //date object
+      max={nexMonth} //date object
       darkMode={false}
     />
   )
@@ -45,15 +42,13 @@ const App = () => {
 export default App
 ```
 
-### DateTime shape
+### Date Object
 
 ```jsx
 {
   year: PropTypes.number,
   month: PropTypes.number,
   day: PropTypes.number,
-  hour: PropTypes.number,
-  minute: PropTypes.number,
 }
 ```
 
