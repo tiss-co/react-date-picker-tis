@@ -26,6 +26,7 @@ export const DatePicker = ({
   containerId,
   buttonId,
   datePickerId,
+  updateButton = { current: () => { } }
 }) => {
   const [anchor, setAnchor] = useState();
   const [date, setDate] = useState();
@@ -35,6 +36,8 @@ export const DatePicker = ({
     if (!anchor && prevAnchor && date)
       onChange(date);
   }, [anchor]);
+
+  updateButton.current = date => setDate(date);
 
   return (
     <div className={classNames(css.container_DatePickerTis, {
@@ -48,7 +51,7 @@ export const DatePicker = ({
         >
           {
             date ?
-              `${moment(date).format('MMM D[,] YYYY')}`
+              `${moment(new Date(date?.year, date?.month - 1, date?.day)).format('MMM D[,] YYYY')}`
               : 'Date Selector'
           }
         </button>
@@ -94,6 +97,7 @@ DatePicker.propTypes = {
   darkMode: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
   initialDate: PropTypes.object,
+  updateButton: PropTypes.object,
   min: PropTypes.object,
   max: PropTypes.object,
   containerId: PropTypes.string,
