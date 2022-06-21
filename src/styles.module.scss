@@ -36,10 +36,13 @@ $bg-hover-dark: #4e4f50;
       padding: 8px 11px;
       cursor: pointer;
       transition: 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       svg {
         fill: #f7f7f7;
-        width: 15px;
-        height: 15px;
+        width: 17px;
+        height: 18px;
         margin-right: 7px;
       }
       @media (max-width: 1279px) {
