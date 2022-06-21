@@ -5,6 +5,7 @@ import { Popover } from '@material-ui/core';
 import classNames from 'classnames';
 import moment from 'moment';
 import PropTypes from 'prop-types';
+import { CalendarIcon } from './assets/icons';
 
 const usePrev = state => {
   const ref = useRef();
@@ -49,6 +50,7 @@ export const DatePicker = ({
           className={buttonClassName}
           onClick={e => setAnchor(e?.currentTarget)}
         >
+          <CalendarIcon />
           {
             date ?
               `${moment(new Date(date?.year, date?.month - 1, date?.day)).format('MMM D[,] YYYY')}`

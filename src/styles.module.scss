@@ -24,17 +24,28 @@ $bg-hover-dark: #4e4f50;
 .container_DatePickerTis {
   .buttonContainer_DatePickerTis {
     > button {
-      width: fit-content;
       background-color: $selected-color;
       color: #f7f7f7;
-      font-family: $font-family-medium;
-      font-size: var(--font-size-small);
-      outline: none;
-      margin: 0;
-      border: none;
-      padding: 4px 10px;
+      font-family: $font-family-regular;
+      border: 0;
+      outline: 0;
+      border-radius: 5px;
+      font-size: var(--font-size-x-small);
+      transition: 0.3s;
+      white-space: nowrap;
+      padding: 8px 11px;
       cursor: pointer;
-      border-radius: 4px;
+      transition: 0.3s;
+      svg {
+        fill: #f7f7f7;
+        width: 15px;
+        height: 15px;
+        margin-right: 7px;
+      }
+      @media (max-width: 1279px) {
+        font-size: var(--font-size-medium);
+        padding: 5px 10px !important;
+      }
     }
   }
   .DatePickerContainer_DatePickerTis {
