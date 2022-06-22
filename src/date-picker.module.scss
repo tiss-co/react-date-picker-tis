@@ -509,6 +509,10 @@ $bg-hover-dark: #4e4f50;
         &:not(.selectedMonth_YearPickerTis):hover {
           background-color: $bg-hover-light;
         }
+        &.disableMonth_YearPickerTis {
+          color: $bg-header-disable-light;
+          pointer-events: none;
+        }
       }
     }
   }
@@ -516,5 +520,17 @@ $bg-hover-dark: #4e4f50;
   &.Dark_YearPickerTis {
     border-color: $border-dark;
     color: &$font-normal-dark;
+    .year_YearPickerTis {
+      &.selectedYear_YearPickerTis {
+        color: $font-normal-light;
+      }
+    }
+    .monthsContainer_YearPickerTis {
+      .month_YearPickerTis {
+        &.disableMonth_YearPickerTis {
+          color: $bg-hover-dark;
+        }
+      }
+    }
   }
 }

@@ -316,59 +316,77 @@ export const DatePicker = ({
                     [css.Dark_YearPickerTis]: darkMode
                 })}>
                     {
-                        Array(200).fill(undefined).map((item, yearIndex) =>
-                            <div
-                                className={css.yearContainer_YearPickerTis}
-                                key={yearIndex}
-                                id={(today.getFullYear() - 100) + yearIndex === date.year ? 'selected-year' : undefined}
-                            >
+                        Array(200).fill(undefined)
+                            .map((_, index) => (today.getFullYear() - 100) + index)
+                            .filter(year => {
+                                if (max && min)
+                                    return year <= max?.year && year >= min?.year;
+                                if (max && !min)
+                                    return year <= max?.year;
+                                if (!max && min)
+                                    return year >= min?.year;
+                                return true;
+                            })
+                            .map(year =>
                                 <div
-                                    className={classNames(css.year_YearPickerTis, {
-                                        [css.selectedYear_YearPickerTis]: (today.getFullYear() - 100) + yearIndex === date.year
-                                    })}
-                                    onClick={() => {
-                                        const year = (today.getFullYear() - 100) + yearIndex;
-                                        setDate(prev => ({
-                                            ...prev,
-                                            year
-                                        }));
-                                        setTimeout(() => {
-                                            scrollToItem('selected-year', 'smooth');
-                                        }, 0);
-                                    }}
+                                    className={css.yearContainer_YearPickerTis}
+                                    key={year}
+                                    id={year === date.year ? 'selected-year' : undefined}
                                 >
-                                    {(today.getFullYear() - 100) + yearIndex}
-                                </div>
-                                {
-                                    ((today.getFullYear() - 100) + yearIndex === date.year) &&
-                                    <div className={css.monthsContainer_YearPickerTis}>
-                                        {
-                                            smallMonthNames.map((month, index) =>
-                                                <div
-                                                    key={month}
-                                                    className={classNames(css.month_YearPickerTis, {
-                                                        [css.selectedMonth_YearPickerTis]: index === date.month - 1
-                                                    })}
-                                                    onClick={() => {
-                                                        const month = index + 1;
-                                                        setDate(prev => ({
-                                                            ...prev,
-                                                            month
-                                                        }));
-                                                        setAnchor(null);
-                                                    }}>
-                                                    {month}
-                                                </div>
-                                            )
-                                        }
+                                    <div
+                                        className={classNames(css.year_YearPickerTis, {
+                                            [css.selectedYear_YearPickerTis]: year === date.year,
+                                        })}
+                                        onClick={() => {
+                                            let month = date.month;
+                                            if (max && year === max?.year && month > max?.month)
+                                                month = max?.month;
+                                            if (min && year === min?.year && month < min?.month)
+                                                month = min?.month;
+                                            setDate(prev => ({
+                                                ...prev,
+                                                year,
+                                                month
+                                            }));
+                                            setTimeout(() => {
+                                                scrollToItem('selected-year', 'smooth');
+                                            }, 0);
+                                        }}
+                                    >
+                                        {year}
                                     </div>
-                                }
-                            </div>
-                        )
+                                    {
+                                        (year === date.year) &&
+                                        <div className={css.monthsContainer_YearPickerTis}>
+                                            {
+                                                smallMonthNames.map((month, index) =>
+                                                    <div
+                                                        key={month}
+                                                        className={classNames(css.month_YearPickerTis, {
+                                                            [css.selectedMonth_YearPickerTis]: index === date.month - 1,
+                                                            [css.disableMonth_YearPickerTis]: (year === min?.year && index + 1 < min?.month) ||
+                                                                (year === max?.year && index + 1 > max?.month)
+                                                        })}
+                                                        onClick={() => {
+                                                            const month = index + 1;
+                                                            setDate(prev => ({
+                                                                ...prev,
+                                                                month
+                                                            }));
+                                                            setAnchor(null);
+                                                        }}>
+                                                        {month}
+                                                    </div>
+                                                )
+                                            }
+                                        </div>
+                                    }
+                                </div>
+                            )
                     }
                 </div>
-            </Popover>
-        </div>
+            </Popover >
+        </div >
     );
 };
 
