@@ -1,6 +1,3 @@
-$font-family-regular: Helvetica-Neue-Regular;
-$font-family-medium: Helvetica-Neue-Medium;
-$font-family-bold: Helvetica-Neue-Bold;
 $bg-box-light: #ffffff;
 $bg-box-dark: #242526;
 $bg-box-2-light: #e6e7eb;
@@ -26,7 +23,6 @@ $bg-hover-dark: #4e4f50;
     > button {
       background-color: $selected-color;
       color: #f7f7f7;
-      font-family: $font-family-regular;
       border: 0;
       outline: 0;
       border-radius: 5px;
