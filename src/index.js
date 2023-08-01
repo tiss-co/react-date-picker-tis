@@ -27,7 +27,8 @@ export const DatePicker = ({
   containerId,
   buttonId,
   datePickerId,
-  updateButton = { current: () => { } }
+  updateButton = { current: () => { } },
+  placeholder = 'Date Selector'
 }) => {
   const [anchor, setAnchor] = useState();
   const [date, setDate] = useState();
@@ -54,7 +55,8 @@ export const DatePicker = ({
           {
             date ?
               `${moment(new Date(date?.year, date?.month - 1, date?.day)).format('MMM D[,] YYYY')}`
-              : 'Date Selector'
+              :
+              placeholder
           }
         </button>
       </div>
@@ -106,4 +108,5 @@ DatePicker.propTypes = {
   buttonId: PropTypes.string,
   datePickerId: PropTypes.string,
   pickerClassName: PropTypes.string,
+  placeholder: PropTypes.string,
 };
