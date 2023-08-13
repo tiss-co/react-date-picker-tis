@@ -117,7 +117,7 @@ $bg-hover-dark: #4e4f50;
 
   &.hideTime_SimpleDatePickerTis {
     width: fit-content;
-    max-width: 250px;
+    max-width: 300px;
   }
 
   > .dateContainer_SimpleDatePickerTis {
@@ -190,8 +190,8 @@ $bg-hover-dark: #4e4f50;
       flex-grow: 1;
 
       > .day_SimpleDatePickerTis {
-        width: 15%;
-        margin: 0 2.5%;
+        width: 10%;
+        margin: 0 5px;
         display: inline-flex;
         justify-content: center;
         align-items: center;
@@ -200,6 +200,13 @@ $bg-hover-dark: #4e4f50;
         transition: 0.2s;
         font-size: var(--font-size-small) !important;
         border-radius: 5px;
+
+        &.day_WeekDay {
+          cursor: default;
+          &:hover {
+            background-color: $bg-box-light !important;
+          }
+        }
 
         &.selected_SimpleDatePickerTis {
           background-color: $selected-color;
@@ -348,6 +355,12 @@ $bg-hover-dark: #4e4f50;
       > .days_SimpleDatePickerTis {
         > .day_SimpleDatePickerTis {
           color: #aaa;
+
+          &.day_WeekDay {
+            &:hover {
+              background-color: $bg-box-dark !important;
+            }
+          }
 
           &.selected_SimpleDatePickerTis {
             color: #fff;

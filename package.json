@@ -1,6 +1,6 @@
 {
   "name": "react-date-picker-tis",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Date picker component for React",
   "author": "boof-tech",
   "license": "MIT",
@@ -53,7 +53,8 @@
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "classnames": "^2.3.1",
+    "dayjs": "^1.11.9",
     "moment": "^2.29.3",
-    "node-sass": "^4.14.1"
+    "node-sass": "^9.0.0"
   }
 }

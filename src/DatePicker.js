@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { PrevIcon, NextIcon, CalendarIcon, DownTriangleIcon } from './assets/icons';
 import css from './date-picker.module.scss';
+import dayjs from 'dayjs';
 
 const scrollToItem = (itemId, behavior = 'auto') => {
     var parent = document.getElementById(itemId)?.parentElement;
@@ -70,6 +71,9 @@ const todayDate = {
 };
 const createDate = ({ year, month, day, }) =>
     new Date(year, month, day, 0, 0, 0, 0);
+
+
+const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 export const DatePicker = ({
     containerClassName,
@@ -241,6 +245,8 @@ export const DatePicker = ({
         }
     }, [anchor]);
 
+    const firstDayOfMonth = dayjs(`${date?.year}-${date?.month}-01T00:00:00`).format('ddd')
+
     return (
         <div className={classNames(css.DatePicker_SimpleDatePickerTis, containerClassName)} {...attrs} id={id}>
             <div
@@ -280,6 +286,27 @@ export const DatePicker = ({
                     </header>
 
                     <div className={css.days_SimpleDatePickerTis}>
+                        {
+                            weekDays.map(day =>
+                                <div
+                                    key={day}
+                                    className={classNames(css.day_SimpleDatePickerTis, css.day_WeekDay)}
+                                >
+                                    <span>{day}</span>
+                                </div>
+                            )
+                        }{
+                            Array(
+                                weekDays.findIndex(day => day === firstDayOfMonth)
+                            ).fill(undefined).map((_, index) =>
+                                <div
+                                    key={index}
+                                    className={classNames(css.day_SimpleDatePickerTis, css.day_WeekDay)}
+                                >
+                                    <span>{''}</span>
+                                </div>
+                            )
+                        }
                         {new Array(31).fill(null).map((_, index) => (
                             <div
                                 key={index}
